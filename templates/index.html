@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Web App</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!-- Add your custom styles if needed -->
+    <style>
+        #loading_gif {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+        #loading_gif img {
+            width: 89px;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Receipt Count Predictor</h1>
+
+    <!-- Form to submit a POST request when the first button is clicked -->
+    <form method="post" id="form_button1">
+        <button type="submit" name="button_type" value="button1">Run Training</button>
+    </form>
+
+    <!-- Display the loading GIF -->
+    <div id="loading_gif">
+        <img src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/b6e0b072897469.5bf6e79950d23.gif" alt="Loading">
+        <p>Training...</p>
+    </div>
+
+    <!-- Form to submit a POST request when the second button is clicked -->
+    <form method="post">
+        <button type="submit" name="button_type" value="button2">Run Inference</button>
+    </form>
+
+    {% if plot_data %}
+        <!-- Display the plot -->
+        <img src="data:image/png;base64,{{ plot_data }}" alt="Plot">
+
+        <!-- Display the HTML table -->
+        {{ html_table1|safe }}
+        {{ html_table2|safe }}
+    {% endif %}
+
+    <!-- Display the output from the second function if available -->
+    {% if output %}
+        <p>{{ output }}</p>
+    {% endif %}
+
+    <!-- Include Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!-- Include custom JavaScript -->
+    <script>
+        // JavaScript code for showing/hiding loading GIF
+        function showLoading() {
+            $("#loading_gif").show();
+        }
+
+        function hideLoading() {
+            $("#loading_gif").hide();
+        }
+
+        // Start checking the progress when the document is ready
+        $(document).ready(function() {
+            $("#form_button1").submit(function() {
+                // Display the loading GIF when the form is submitted
+                showLoading();
+            });
+        });
+    </script>
+
+</body>
+</html>

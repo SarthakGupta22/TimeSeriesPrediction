@@ -1,0 +1,4 @@
+__pycache__
+data/Fetch_data.xlsx
+scripts/TSF_ARIMA.py
+templates/loading.gif
